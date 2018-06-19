@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% set title = 'Items' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+<link rel="stylesheet" href="static/css/home.css">
+<script
+src="http://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous">
+</script>
+
+
+<div class="container">
+	<div class="error">
+		&nbsp;
+	</div>
+	<h1 class="banner">Stock Demo Application</h1>
+	<div class="section editor">
+		<label for="vendor_code">Vendor code
+			<input id="vendor_code" type="text" />
+		</label>
+		<br />
+		<input type="hidden" id="uuid" type="text" />
+		<br />
+		<button class="btn btn-success" id="create">Create</button>
+		<button class="btn btn-warning" id="update">Update</button>
+		<button class="btn btn-danger" id="delete">Delete</button>
+		<button class="btn btn-default" id="reset">Reset</button>
+	</div>
+	<div class="info"><small>Double click item row bellow to edit and update</small></div>
+	<div class="items">
+		<table>
+			<thead>
+				<tr>
+					<th>Vendor code</th>
+					<th>UUID</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script src="static/js/home.js"></script>
+
+{% endblock %}

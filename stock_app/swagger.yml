@@ -1,0 +1,130 @@
+swagger: "2.0"
+info:
+  description: This is the API that goes with our server
+  version: "1.0.0"
+  title: API for stock items
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /items:
+    get:
+      operationId: stock_app.api.read_all
+      tags:
+        - Items
+      summary: Read the entire list of items
+      description: Read the list of items
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of items to get
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering items
+          required: false
+      responses:
+        200:
+          description: Successfully read items list operation
+          schema:
+            type: array
+            items:
+              properties:
+                vendor_code:
+                  type: string
+                uuid:
+                  type: string
+
+    post:
+      operationId: stock_app.api.create
+      tags:
+        - Items
+      summary: Create an item and add it to the items list
+      description: Create a new item in the items list
+      parameters:
+        - name: item
+          in: body
+          description: item to create
+          required: True
+          schema:
+            type: object
+            properties:
+              vendor_code:
+                type: string
+                description: First name of item to create
+              uuid:
+                type: string
+                description: UUID of item to create
+      responses:
+        201:
+          description: Successfully created item in list
+
+  /items/{uuid}:
+    get:
+      operationId: stock_app.api.read_one
+      tags:
+        - Items
+      summary: Read one item from the items list
+      description: Read one item from the items list
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the item to get from the list
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read item from items list operation
+          schema:
+            properties:
+              vendor_code:
+                type: string
+              uuid:
+                type: string
+
+    put:
+      operationId: stock_app.api.update
+      tags:
+        - Items
+      summary: Update an item in the items list
+      description: Update an item in the items list
+      parameters:
+        - name: uuid
+          in: path
+          description: UUID of the item to update
+          type: string
+          required: True
+        - name: item
+          in: body
+          schema:
+            type: object
+            properties:
+              vendor_code:
+                type: string
+              uuid:
+                type: string
+      responses:
+        200:
+          description: Successfully updated item in items list
+
+    delete:
+      operationId: stock_app.api.delete
+      tags:
+        - Items
+      summary: Delete an item from the items list
+      description: Delete an item
+      parameters:
+        - name: uuid
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted an item from items list
